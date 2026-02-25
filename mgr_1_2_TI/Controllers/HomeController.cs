@@ -1,5 +1,5 @@
 using System.Diagnostics;
-// using mgr_1_2_TI.Models;
+using mgr_1_2_TI.Models;
 using Microsoft.AspNetCore.Mvc;
 
 namespace mgr_1_2_TI.Controllers
