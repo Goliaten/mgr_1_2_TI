@@ -21,6 +21,6 @@ namespace mgr_1_2_TI.Models
         // [ForeignKey('Category')]
         [ForeignKey(nameof(Category))]
         public int CategoryId { get; set; }
-        public Category Category { get; set; }
+        public Category? Category { get; set; }
     }
 }
