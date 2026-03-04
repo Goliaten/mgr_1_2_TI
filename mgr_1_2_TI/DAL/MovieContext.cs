@@ -16,8 +16,6 @@ namespace mgr_1_2_TI.DAL
             
         }
 
-        protected MovieContext()
-        {
-        }
+
     }
 }
