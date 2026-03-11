@@ -11,9 +11,9 @@ namespace mgr_1_2_TI.Controllers
             return View();
         }
 
-        public IActionResult Privacy()
+        public IActionResult FooterSites(string viewName)
         {
-            return View();
+            return View(viewName);
         }
     }
 }
