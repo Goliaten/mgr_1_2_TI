@@ -4,7 +4,8 @@
       foreach (var category in Model)
       {
         <li class="nav-item">
-          <a class="nav-link active" href="#">@category.Name</a>
+          <a class="nav-link active"
+             href="@Url.Action("CategoryMovies", "Movie", new { category = category.Name })">@category.Name</a>
         </li>
       }
     }

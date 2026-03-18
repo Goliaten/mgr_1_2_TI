@@ -1,0 +1,34 @@
+@page
+@model IEnumerable<Movie>
+@{
+    ViewData["Title"] = "CategoryMovies";
+}
+
+<table class="table">
+    <tr>
+        <th>
+            Tytuł
+        </th>
+        <th>
+            Reżyser
+        </th>
+        <th>
+            Cena
+        </th>
+    </tr>
+    <tr>
+        @foreach (var x in Model)
+        {
+            <th>
+                @x.Title
+            </th>
+            <th>
+                @x.Director
+            </th>
+            <th>
+                @x.Price zł
+            </th>
+        }
+    </tr>
+
+</table>
