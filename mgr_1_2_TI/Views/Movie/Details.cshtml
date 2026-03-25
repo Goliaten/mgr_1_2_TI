@@ -1,0 +1,21 @@
+@model Movie
+
+<div>
+    <table>
+        <tr>
+            <td>
+                <h1>@Model.Category.Name</h1>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <ul>
+                    <li>@Model.Title</li>
+                    <li>@Model.Director</li>
+                    <li>@Model.Description</li>
+                    <li>@Model.Price zł</li>
+                </ul>
+            </td>
+        </tr>
+    </table>
+</div>

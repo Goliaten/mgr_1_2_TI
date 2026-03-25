@@ -32,5 +32,16 @@ namespace mgr_1_2_TI.Controllers
 
             return View(movies);
         }
+
+        public IActionResult Details(int movieId)
+        {
+            Console.WriteLine(movieId);
+            var movie = db.T_Movies.Find(movieId);
+            Console.WriteLine(movieId);
+            var categories = db.T_Categories.Find(movie?.CategoryId);
+            Console.WriteLine(movieId);
+
+            return View(movie);
+        }
     }
 }

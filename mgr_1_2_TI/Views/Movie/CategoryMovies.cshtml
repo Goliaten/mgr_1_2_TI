@@ -1,8 +1,4 @@
-@page
 @model IEnumerable<Movie>
-@{
-    ViewData["Title"] = "CategoryMovies";
-}
 
 <table class="table">
     <tr>
@@ -16,19 +12,24 @@
             Cena
         </th>
     </tr>
-    <tr>
-        @foreach (var x in Model)
-        {
-            <th>
+    @foreach (var x in Model)
+    {
+        <tr>
+            <td>
                 @x.Title
-            </th>
-            <th>
+            </td>
+            <td>
                 @x.Director
-            </th>
-            <th>
+            </td>
+            <td>
                 @x.Price zł
-            </th>
-        }
-    </tr>
+            </td>
+            <td>
+                <a href="@Url.Action("Details", "Movie", new { movieId = x.Id })">🔍
+
+                </a>
+            </td>
+        </tr>
+    }
 
 </table>
