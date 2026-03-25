@@ -11,3 +11,7 @@
 .shop-nav a:hover{
   font-style: oblique;
 }
+
+tbody a{
+  text-decoration: none;
+}
