@@ -5,9 +5,8 @@
         <tr>
             <td>
                 <h1>@Model.Category.Name</h1>
+                @(await Component.InvokeAsync("SideMenu", new { Model.CategoryId }))
             </td>
-        </tr>
-        <tr>
             <td>
                 <ul>
                     <li>@Model.Title</li>
