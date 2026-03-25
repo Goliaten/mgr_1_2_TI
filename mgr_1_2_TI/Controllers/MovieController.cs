@@ -27,8 +27,7 @@ namespace mgr_1_2_TI.Controllers
 
         public IActionResult CategoryMovies(string category)
         {
-            // var category_db = db.T_Categories.Include("T_Movies").Where(c => c.Name.ToLower() == category.ToLower()).Single();
-            var category_db = db.T_Categories.Include("T_Movies").Where(c => c.Name.ToLower() == category.ToLower()).Single();
+            var category_db = db.T_Categories.Include("Movies").Where(c => c.Name.ToLower() == category.ToLower()).Single();
             var movies = category_db.Movies.ToList();
 
             return View(movies);
