@@ -18,7 +18,7 @@ namespace mgr_1_2_TI.ViewComponents
 
         public async Task<IViewComponentResult> InvokeAsync()
         {
-            return await Task.FromResult(View("Menu", db.T_Categories.ToList())); // # FIXME missing view name 
+            return await Task.FromResult(View("Menu", db.T_Categories.ToList()));
         }
     }
 }
