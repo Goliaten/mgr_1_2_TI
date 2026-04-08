@@ -8,6 +8,9 @@
                 @(await Component.InvokeAsync("SideMenu", new { Model.CategoryId }))
             </td>
             <td>
+                <img src="@(Url.Content($"~/posters/{Model.PosterName}"))" class="posters" alt="@Model.Title poster" />
+            </td>
+            <td>
                 <ul>
                     <li>@Model.Title</li>
                     <li>@Model.Director</li>
