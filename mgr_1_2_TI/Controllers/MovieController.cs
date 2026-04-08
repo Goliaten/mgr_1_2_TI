@@ -33,6 +33,12 @@ namespace mgr_1_2_TI.Controllers
             return View(movies);
         }
 
+        public IActionResult All()
+        {
+            var movies = db.T_Movies.ToList();
+            return View(movies);
+        }
+
         public IActionResult Details(int movieId)
         {
             Console.WriteLine(movieId);

@@ -1,0 +1,29 @@
+@model IEnumerable<mgr_1_2_TI.Models.Movie>
+
+<div class="container">
+  <h2>All Movies</h2>
+  <div class="row">
+    @foreach (var movie in Model)
+    {
+      <div class="col-6 col-sm-4 col-md-3 mb-4">
+        <a asp-controller="Movie" asp-action="Details" asp-route-movieId="@movie.Id" class="text-decoration-none">
+          @if (!string.IsNullOrEmpty(movie.PosterName))
+          {
+            <img class="img-fluid poster-img"
+                 src="@(Url.Content("~/posters/" + movie.PosterName))"
+                 alt="@movie.Title"
+                 style="width:100%;height:300px;object-fit:cover;"
+                 onerror="this.outerHTML='<div class=&quot;placeholder text-center&quot; style=&quot;width:100%;height:300px;display:flex;align-items:center;justify-content:center;background:#e9ecef;color:#6c757d;font-weight:600;&quot;>No Image<br/>available</div>';" />
+          }
+          else
+          {
+            <div class="placeholder text-center" style="width:100%;height:300px;display:flex;align-items:center;justify-content:center;background:#e9ecef;color:#6c757d;font-weight:600;">
+              <div>No Image<br/>available</div>
+            </div>
+          }
+          <div class="mt-2 text-center text-dark">@movie.Title</div>
+        </a>
+      </div>
+    }
+  </div>
+</div>

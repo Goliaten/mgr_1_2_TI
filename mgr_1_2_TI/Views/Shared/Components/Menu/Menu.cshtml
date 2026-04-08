@@ -1,5 +1,8 @@
 <div class="container-fluid">
   <ul class="navbar-nav shop-nav">
+    <li class="nav-item">
+      <a class="nav-link active" href="@Url.Action("All", "Movie")">All Movies</a>
+    </li>
     @{
       foreach (var category in Model)
       {
