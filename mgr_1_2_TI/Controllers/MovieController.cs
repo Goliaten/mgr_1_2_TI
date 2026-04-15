@@ -45,7 +45,7 @@ namespace mgr_1_2_TI.Controllers
             Console.WriteLine(movieId);
             var movie = db.T_Movies.Find(movieId);
             Console.WriteLine(movieId);
-            var categories = db.T_Categories.Find(movie?.CategoryId);
+            _ = db.T_Categories.Find(movie?.CategoryId);
             Console.WriteLine(movieId);
 
             return View(movie);
@@ -54,8 +54,10 @@ namespace mgr_1_2_TI.Controllers
         [HttpGet]
         public IActionResult AddMovie()
         {
-            var model = new AddMovieViewModel();
-            model.Categories = db.T_Categories.ToList();
+            var model = new AddMovieViewModel
+            {
+                Categories = db.T_Categories.ToList()
+            };
 
             return View(model);
         }
