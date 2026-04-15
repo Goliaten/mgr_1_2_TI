@@ -1,4 +1,9 @@
 .venv
 .python-version
 uv.lock
+
 *.png
+*.jpeg
+*.jpg
+*.webp
+*.gif
