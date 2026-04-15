@@ -7,56 +7,74 @@
     enctype = "multipart/form-data"
 }))
 {
-    //tytuł
-    @Html.LabelFor(m => m.Movie.Title, labelText: "Title:")
+    <div class="form-group">
+        @Html.LabelFor(m => m.Movie.Title, labelText: "Title:")
     
-    @Html.TextBoxFor(m => m.Movie.Title)
+        @Html.TextBoxFor(m => m.Movie.Title, new
+        {
+            @class = "form-control"
+        })
+    </div>
     
-    <br />
+    <div class="form-group">
+        @Html.LabelFor(m => m.Movie.Director, "Director:")
+    
+        @Html.TextBoxFor(m => m.Movie.Director, new
+        {
+            @class = "form-control"
+        })
+    </div>
+    
+    <div class="form-group">
+        @Html.LabelFor(m => m.Movie.Description, "Description:")
+    
+        @Html.TextAreaFor(m => m.Movie.Description, new
+        {
+            @class = "form-control"
+        })
+    </div>
+    
+    <div class="form-group">
+        @Html.LabelFor(m => m.Movie.CategoryId, "Category:")
+    
+        @foreach (var category in Model.Categories)
+        {
+            <div class="form-group form-check">
+                @Html.RadioButtonFor(m => m.Movie.CategoryId, category.Id, new
+                {
+                    @class = "form-check-input"
+                })
+                @Html.LabelFor(m => m.Movie.CategoryId, category.Name, new
+                {
+                    @class = "form-check-label"
+                })
+            </div>
+        }
+    </div>
 
-    // reżyser
-    @Html.LabelFor(m => m.Movie.Director, "Director:")
-    
-    @Html.TextBoxFor(m => m.Movie.Director)
-    
-    <br />
 
-    // opis
-    @Html.LabelFor(m => m.Movie.Description, "Description:")
+    <div class="form-group">
+        @Html.LabelFor(m => m.Movie.Price, "Price:")
     
-    @Html.TextAreaFor(m => m.Movie.Description)
-    
-    <br />
+        @Html.TextBoxFor(m => m.Movie.Price, new
+        {
+            type = "number",
+            min = "0.01",
+            step = ".01",
+            @class = "form-control"
+        })
+    </div>
 
-    // Kategoria
-    @Html.LabelFor(m => m.Movie.CategoryId, "Category:")
-    
-    @foreach (var category in Model.Categories)
-    {
-        <br />
-        @Html.RadioButtonFor(m => m.Movie.CategoryId, category.Id)
-        @Html.LabelFor(m => m.Movie.CategoryId, category.Name)
-    }
-    <br />
+    <div class="form-group">
+        @Html.LabelFor(m => m.Poster, "Poster:")
+        @Html.TextBoxFor(m => m.Poster, new
+        {
+            type = "file",
+            @class = "form-control-file"
+        })
+    </div>
 
-
-    // cena
-    @Html.LabelFor(m => m.Movie.Price, "Price:")
-    
-    @Html.TextBoxFor(m => m.Movie.Price, new
-    {
-        type = "number",
-        min = "0.01",
-        step = ".01"
-    })
-
-    // plakat
-    @Html.TextBoxFor(m => m.Poster, new
-    {
-        type = "file"
-    })
-
-    <button type="submit">
-        Send
+    <button type="submit" class="btn btn-primary">
+        Submit
     </button>
 }
