@@ -4,6 +4,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using mgr_1_2_TI.DAL;
+using mgr_1_2_TI.Models.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Internal;
@@ -49,5 +50,21 @@ namespace mgr_1_2_TI.Controllers
 
             return View(movie);
         }
+
+        [HttpGet]
+        public IActionResult AddMovie()
+        {
+            var model = new AddMovieViewModel();
+            model.Categories = db.T_Categories.ToList();
+
+            return View(model);
+        }
+
+        [HttpPost]
+        public IActionResult AddMovie(AddMovieViewModel model)
+        {
+            return View();
+        }
+
     }
 }
