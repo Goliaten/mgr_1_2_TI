@@ -1,11 +1,62 @@
-@page
-@model mgr_1_2_TI.Views.Movie.AddMovie
-@{
-    ViewData["Title"] = "AddMovie";
-}
+@using mgr_1_2_TI.Models.ViewModels
+@model AddMovieViewModel
 
-<h1>@ViewData["Title"]</h1>
 
-<div>
+@using (Html.BeginForm("AddMovie", "Movie", FormMethod.Post, new
+{
+    enctype = "multipart/form-data"
+}))
+{
+    //tytuł
+    @Html.LabelFor(m => m.Movie.Title, labelText: "Title:")
     
-</div>
+    @Html.TextBoxFor(m => m.Movie.Title)
+    
+    <br />
+
+    // reżyser
+    @Html.LabelFor(m => m.Movie.Director, "Director:")
+    
+    @Html.TextBoxFor(m => m.Movie.Director)
+    
+    <br />
+
+    // opis
+    @Html.LabelFor(m => m.Movie.Description, "Description:")
+    
+    @Html.TextAreaFor(m => m.Movie.Description)
+    
+    <br />
+
+    // Kategoria
+    @Html.LabelFor(m => m.Movie.CategoryId, "Category:")
+    
+    @foreach (var category in Model.Categories)
+    {
+        <br />
+        @Html.RadioButtonFor(m => m.Movie.CategoryId, category.Id)
+        @Html.LabelFor(m => m.Movie.CategoryId, category.Name)
+    }
+    <br />
+
+
+    // cena
+    @Html.LabelFor(m => m.Movie.Price, "Price:")
+    
+    @Html.TextBoxFor(m => m.Movie.Price, new
+    {
+        type = "number",
+        min = "0.01",
+        step = ".01"
+    })
+
+    // plakat
+    @Html.TextBoxFor(m => m.Poster, new
+    {
+        type = "file"
+    })
+
+    <button type="submit">
+        Send
+    </button>
+}
