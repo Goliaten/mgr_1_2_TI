@@ -15,10 +15,12 @@ namespace mgr_1_2_TI.Controllers
     public class MovieController : Controller
     {
         MovieContext db;
+        IWebHostEnvironment whe;
 
-        public MovieController(MovieContext db)
+        public MovieController(MovieContext db, IWebHostEnvironment whe)
         {
             this.db = db;
+            this.whe = whe;
         }
 
         public IActionResult Index()
@@ -65,6 +67,16 @@ namespace mgr_1_2_TI.Controllers
         [HttpPost]
         public IActionResult AddMovie(AddMovieViewModel model)
         {
+            var imgDir = Path.Combine([whe.WebRootPath, "content", "posters"]);
+            var posterName = $"{Guid.NewGuid()}_{model.Poster.FileName}";
+            var imgPath = Path.Combine([imgDir, posterName]);
+            model.Poster.CopyTo(new FileStream(imgPath, FileMode.Create));
+
+            model.Movie.PosterName = posterName;
+
+            db.T_Movies.Add(model.Movie);
+            db.SaveChanges();
+
             return View();
         }
 
