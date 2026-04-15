@@ -44,11 +44,8 @@ namespace mgr_1_2_TI.Controllers
 
         public IActionResult Details(int movieId)
         {
-            Console.WriteLine(movieId);
             var movie = db.T_Movies.Find(movieId);
-            Console.WriteLine(movieId);
             _ = db.T_Categories.Find(movie?.CategoryId);
-            Console.WriteLine(movieId);
 
             return View(movie);
         }
@@ -67,7 +64,7 @@ namespace mgr_1_2_TI.Controllers
         [HttpPost]
         public IActionResult AddMovie(AddMovieViewModel model)
         {
-            var imgDir = Path.Combine([whe.WebRootPath, "content", "posters"]);
+            var imgDir = Path.Combine([whe.WebRootPath, "posters"]);
             var posterName = $"{Guid.NewGuid()}_{model.Poster.FileName}";
             var imgPath = Path.Combine([imgDir, posterName]);
             model.Poster.CopyTo(new FileStream(imgPath, FileMode.Create));
@@ -77,7 +74,7 @@ namespace mgr_1_2_TI.Controllers
             db.T_Movies.Add(model.Movie);
             db.SaveChanges();
 
-            return View();
+            return RedirectToAction("Index");
         }
 
     }
