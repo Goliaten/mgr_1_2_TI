@@ -53,6 +53,25 @@ namespace mgr_1_2_TI.Structure
             return basket;
         }
         // public static List<CartItem> GetFromCart() { }
-    }
 
+        public static decimal GetSumValueFromCart(ISession session, MovieContext db)
+        {
+            decimal sum = 0;
+            foreach (BasketItem item in GetManyFromCart(session, db))
+            {
+                VerifyItemIntegrity(item);
+                sum += item.FullPrice;
+            }
+            return sum;
+        }
+        public static void VerifyItemIntegrity(BasketItem item)
+        {
+
+            if (item.Count * item.UnitPrice != item.FullPrice)
+            {
+                throw new Exception($"Mismatch value between full price and item price in basket. MovieId:{item.Movie.Id}" +
+                $" FullPrice:{item.FullPrice} != Count:{item.Count}*UnitPrice:{item.UnitPrice}");
+            }
+        }
+    }
 }
