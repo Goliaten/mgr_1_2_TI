@@ -21,25 +21,26 @@ namespace mgr_1_2_TI.Structure
             {
                 currentMovie.Count++;
                 currentMovie.FullPrice += currentMovie.UnitPrice;
-                return;
             }
-
-            var movieToAdd = db.T_Movies.Find(movieId);
-
-            if (movieToAdd == null)
+            else
             {
-                return;
+                var movieToAdd = db.T_Movies.Find(movieId);
+
+                if (movieToAdd == null)
+                {
+                    Console.WriteLine($"No movie found {movieId}");
+                    return;
+                }
+
+                var basketItem = new BasketItem
+                {
+                    Movie = movieToAdd,
+                    Count = 1,
+                    UnitPrice = movieToAdd.Price,
+                    FullPrice = movieToAdd.Price,
+                };
+                basket.Add(basketItem);
             }
-
-            var basketItem = new BasketItem
-            {
-                Movie = movieToAdd,
-                Count = 1,
-                UnitPrice = movieToAdd.Price,
-                FullPrice = movieToAdd.Price,
-            };
-            basket.Add(basketItem);
-
             SessionHelper.ObjectToJson<List<BasketItem>>(session, BasketEnum.CartSessionKey, basket);
         }
 
@@ -48,7 +49,10 @@ namespace mgr_1_2_TI.Structure
             var basket = SessionHelper.GetObjectFromJson<List<BasketItem>>(session, BasketEnum.CartSessionKey);
 
             // if it's new, initialise it
-            basket ??= [];
+            if (basket == null)
+            {
+                basket = [];
+            }
 
             return basket;
         }

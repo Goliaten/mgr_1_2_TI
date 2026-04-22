@@ -18,16 +18,13 @@
             <td>
                 @x.Title
             </td>
+            <td>@x.Director</td>
+            <td>@x.Price zł</td>
             <td>
-                @x.Director
+                <a href="@Url.Action("Details", "Movie", new { movieId = x.Id })">🔍</a>
             </td>
             <td>
-                @x.Price zł
-            </td>
-            <td>
-                <a href="@Url.Action("Details", "Movie", new { movieId = x.Id })">🔍
-
-                </a>
+                <a href="@Url.Action("AddToBasket", "Basket", new { id = x.Id })">🛒</a>
             </td>
         </tr>
     }
