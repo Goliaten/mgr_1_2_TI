@@ -11,9 +11,13 @@ namespace mgr_1_2_TI.Structure
 {
     public static class SessionHelper
     {
-        public static T GetObjectFromJson<T>(this ISession session, string key)
+        public static T? GetObjectFromJson<T>(this ISession session, string key)
         {
             var value = session.GetString(key);
+            if (value == null)
+            {
+                return default;
+            }
             var out_var = JsonSerializer.Deserialize<T>(value);
 
 #pragma warning disable CS8603 // Possible null reference return.
