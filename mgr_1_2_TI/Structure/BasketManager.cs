@@ -9,7 +9,7 @@ using mgr_1_2_TI.Models;
 
 namespace mgr_1_2_TI.Structure
 {
-    public static class CartManager
+    public static class BasketManager
     {
         public static void AddToCart(ISession session, MovieContext db, int movieId)
         {
