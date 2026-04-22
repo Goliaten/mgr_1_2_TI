@@ -1,0 +1,24 @@
+﻿@using mgr_1_2_TI.Structure
+@model List<BasketItem>
+
+<table class="table">
+    <th>
+        <td>Movie title</td>
+        <td>Count</td>
+        <td>Unit price</td>
+        <td>Full price</td>
+    </th>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>@item.Movie.Title</td>
+            <td>@item.Count</td>
+            <td>@item.UnitPrice</td>
+            <td>@item.FullPrice zł</td>
+        </tr>
+    }
+    <tr>
+        <!-- FIXME move this style to .css -->
+        <td colspan="4" style="text-align: right;">@ViewBag.Total</td>
+    </tr>
+</table>
