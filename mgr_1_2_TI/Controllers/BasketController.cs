@@ -10,7 +10,6 @@ using Microsoft.Extensions.Logging;
 
 namespace mgr_1_2_TI.Controllers
 {
-    [Route("[controller]")]
     public class BasketController : Controller
     {
         MovieContext db;
