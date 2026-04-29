@@ -43,6 +43,27 @@ namespace mgr_1_2_TI.Structure
             }
             SessionHelper.ObjectToJson<List<BasketItem>>(session, BasketEnum.CartSessionKey, basket);
         }
+        public static int RemoveFromBasket(ISession session, MovieContext db, int movieId)
+        {
+            // returns number of items left in a field
+            var basket = GetManyFromBasket(session, db);
+
+            var currentMovie = basket.Find(f => f.Movie.Id == movieId);
+            if (currentMovie == null)
+            {
+                return 0;
+            }
+
+            currentMovie.Count--;
+            if (currentMovie.Count <= 0)
+            {
+                basket.Remove(currentMovie);
+            }
+
+            SessionHelper.ObjectToJson<List<BasketItem>>(session, BasketEnum.CartSessionKey, basket);
+            return currentMovie.Count;
+        }
+
 
         public static List<BasketItem> GetManyFromBasket(ISession session, MovieContext db)
         {
