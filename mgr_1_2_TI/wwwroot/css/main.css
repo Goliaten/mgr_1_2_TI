@@ -19,3 +19,10 @@ tbody a{
 .posters{
   width: 8rem;
 }
+
+.details-list {
+  list-style-type:none;
+}
+.details-header{
+  font-weight: bold;
+}

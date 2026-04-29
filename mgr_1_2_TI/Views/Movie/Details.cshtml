@@ -11,12 +11,30 @@
                 <img src="@(Url.Content($"~/posters/{Model.PosterName}"))" class="posters" alt="@Model.Title poster" />
             </td>
             <td>
-                <ul>
-                    <li>@Model.Title</li>
-                    <li>@Model.Director</li>
-                    <li>@Model.Description</li>
-                    <li>@Model.Price zł</li>
-                </ul>
+                <table>
+                    <tr>
+                        <td class="details-header">Title</td>
+                        <td>@Model.Title</td>
+                    </tr>
+                    <tr>
+                        <td class="details-header">Director</td>
+                        <td>@Model.Director</td>
+                    </tr>
+                    <tr>
+                        <td class="details-header">Description</td>
+                        <td>@Model.Description</td>
+                    </tr>
+                    <tr>
+                        <td class="details-header">Price</td>
+                        <td>@Model.Price zł</td>
+                    </tr>
+                    <tr>
+                        <td class="details-header">Add to basket</td>
+                        <td>
+                            <a href="@Url.Action("AddToBasket", "Basket", new { id = Model.Id })">🛒</a>
+                        </td>
+                    </tr>
+                </table>
             </td>
         </tr>
     </table>
