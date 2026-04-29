@@ -21,14 +21,14 @@ namespace mgr_1_2_TI.Controllers
 
         public IActionResult Index()
         {
-            var basket = BasketManager.GetManyFromCart(HttpContext.Session, db);
-            ViewBag.Total = BasketManager.GetSumValueFromCart(HttpContext.Session, db);
+            var basket = BasketManager.GetManyFromBasket(HttpContext.Session, db);
+            ViewBag.Total = BasketManager.GetSumValueFromBasket(HttpContext.Session, db);
 
             return View(basket);
         }
         public IActionResult AddToBasket(int id)
         {
-            BasketManager.AddToCart(HttpContext.Session, db, id);
+            BasketManager.AddToBasket(HttpContext.Session, db, id);
             return RedirectToAction("Index");
         }
     }

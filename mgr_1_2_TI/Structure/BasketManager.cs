@@ -11,9 +11,9 @@ namespace mgr_1_2_TI.Structure
 {
     public static class BasketManager
     {
-        public static void AddToCart(ISession session, MovieContext db, int movieId)
+        public static void AddToBasket(ISession session, MovieContext db, int movieId)
         {
-            var basket = GetManyFromCart(session, db);
+            var basket = GetManyFromBasket(session, db);
 
             var currentMovie = basket.Find(f => f.Movie.Id == movieId);
 
@@ -44,7 +44,7 @@ namespace mgr_1_2_TI.Structure
             SessionHelper.ObjectToJson<List<BasketItem>>(session, BasketEnum.CartSessionKey, basket);
         }
 
-        public static List<BasketItem> GetManyFromCart(ISession session, MovieContext db)
+        public static List<BasketItem> GetManyFromBasket(ISession session, MovieContext db)
         {
             var basket = SessionHelper.GetObjectFromJson<List<BasketItem>>(session, BasketEnum.CartSessionKey);
 
@@ -58,10 +58,10 @@ namespace mgr_1_2_TI.Structure
         }
         // public static List<CartItem> GetFromCart() { }
 
-        public static decimal GetSumValueFromCart(ISession session, MovieContext db)
+        public static decimal GetSumValueFromBasket(ISession session, MovieContext db)
         {
             decimal sum = 0;
-            foreach (BasketItem item in GetManyFromCart(session, db))
+            foreach (BasketItem item in GetManyFromBasket(session, db))
             {
                 VerifyItemIntegrity(item);
                 sum += item.FullPrice;
