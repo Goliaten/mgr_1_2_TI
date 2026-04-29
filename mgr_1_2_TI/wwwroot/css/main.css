@@ -26,3 +26,8 @@ tbody a{
 .details-header{
   font-weight: bold;
 }
+.basket-totals-header{
+  font-weight: bold;
+  text-align: right;
+  column-span: 3;
+}
