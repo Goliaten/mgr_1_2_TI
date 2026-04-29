@@ -4,6 +4,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using mgr_1_2_TI.DAL;
+using mgr_1_2_TI.Models.ViewModels;
 using mgr_1_2_TI.Structure;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
@@ -30,6 +31,17 @@ namespace mgr_1_2_TI.Controllers
         {
             BasketManager.AddToBasket(HttpContext.Session, db, id);
             return RedirectToAction("Index");
+        }
+        public IActionResult RemoveFromBasket(int id)
+        {
+            var model = new RemoveViewModel()
+            {
+                itemId = id,
+                itemQuantity = BasketManager.RemoveFromBasket(HttpContext.Session, db, id),
+                itemFullPrice = BasketManager.GetItemFullPrice(HttpContext.Session, db, id),
+                basketSum = BasketManager.GetSumValueFromBasket(HttpContext.Session, db)
+            };
+            return Json(model);
         }
     }
 }

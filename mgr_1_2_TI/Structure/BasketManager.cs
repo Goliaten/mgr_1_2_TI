@@ -55,6 +55,7 @@ namespace mgr_1_2_TI.Structure
             }
 
             currentMovie.Count--;
+            currentMovie.FullPrice = currentMovie.UnitPrice * currentMovie.Count;
             if (currentMovie.Count <= 0)
             {
                 basket.Remove(currentMovie);
@@ -79,6 +80,18 @@ namespace mgr_1_2_TI.Structure
         }
         // public static List<CartItem> GetFromCart() { }
 
+        public static decimal GetItemFullPrice(ISession session, MovieContext db, int id)
+        {
+            // returns number of items left in a field
+            var basket = GetManyFromBasket(session, db);
+
+            var currentMovie = basket.Find(f => f.Movie.Id == id);
+            if (currentMovie == null)
+            {
+                return 0;
+            }
+            return currentMovie.FullPrice;
+        }
         public static decimal GetSumValueFromBasket(ISession session, MovieContext db)
         {
             decimal sum = 0;

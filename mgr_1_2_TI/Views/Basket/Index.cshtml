@@ -7,19 +7,46 @@
         <th>Count</th>
         <th>Unit price</th>
         <th>Full price</th>
+        <th>Remove one</th>
     </tr>
     @foreach (var item in Model)
     {
-        <tr>
+        <tr class="item-id-@item.Movie.Id">
             <td>@item.Movie.Title</td>
-            <td>@item.Count</td>
+            <td class="item-quantity-@item.Movie.Id">@item.Count</td>
             <td>@item.UnitPrice</td>
-            <td>@item.FullPrice zł</td>
+            <td class="item-full-price-@item.Movie.Id">@item.FullPrice zł</td>
+            <td>
+                <a href="#" class="trash" data-id="@item.Movie.Id">
+                    🗑
+                </a>
+            </td>
         </tr>
     }
     <tr>
         <!-- FIXME move this style to .css -->
-        <td style="text-align: right;font-weight:bold" colspan="3">Totals:</td>
-        <td>@ViewBag.Total</td>
+        <td class="basket-totals-header">Totals:</td>
+        <td class="basket-totals">@ViewBag.Total</td>
     </tr>
 </table>
+
+@section scripts {
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script type="text/javascript">
+        $(".trash").click(function () {
+            const idBasketItem = $(this).data("id");
+            
+            if (idBasketItem == '') { return; }
+            $.post("/Basket/RemoveFromBasket", { "id": idBasketItem }, function (response) {
+                if (response.itemQuantity == 0) {
+                    $(".item-id-" + response.itemId).fadeOut("slow");
+                    return;
+                }
+                $(".item-quantity-" + response.itemId).text(response.itemQuantity);
+                $(".item-full-price-" + response.itemId).text(response.itemFullPrice + 'zł');
+
+                $(".basket-totals").text(response.basketSum + "zł");
+            });
+        });
+    </script>
+}
