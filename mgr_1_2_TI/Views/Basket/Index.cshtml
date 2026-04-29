@@ -2,12 +2,12 @@
 @model List<BasketItem>
 
 <table class="table">
-    <th>
-        <td>Movie title</td>
-        <td>Count</td>
-        <td>Unit price</td>
-        <td>Full price</td>
-    </th>
+    <tr>
+        <th>Movie title</th>
+        <th>Count</th>
+        <th>Unit price</th>
+        <th>Full price</th>
+    </tr>
     @foreach (var item in Model)
     {
         <tr>
@@ -19,6 +19,7 @@
     }
     <tr>
         <!-- FIXME move this style to .css -->
-        <td colspan="4" style="text-align: right;">@ViewBag.Total</td>
+        <td style="text-align: right;font-weight:bold" colspan="3">Sum:</td>
+        <td>@ViewBag.Total</td>
     </tr>
 </table>
