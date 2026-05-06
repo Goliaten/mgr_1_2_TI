@@ -2,13 +2,16 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using mgr_1_2_TI.DAL;
+using mgr_1_2_TI.Models;
 using mgr_1_2_TI.Models.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Internal;
 using Microsoft.Extensions.Logging;
+using Microsoft.IdentityModel.Tokens;
 
 namespace mgr_1_2_TI.Controllers
 {
@@ -77,5 +80,19 @@ namespace mgr_1_2_TI.Controllers
             return RedirectToAction("Index");
         }
 
+        [HttpPost]
+        public IActionResult Search(string searchText)
+        {
+            var movies = from f in db.T_Movies select f;
+            if (searchText.IsNullOrEmpty())
+            {
+                return View("CategoryMovies", new List<Movie>());
+                // return RedirectToAction("All");
+            }
+
+            movies = movies.Where(f => f.Title.ToLower().Contains(searchText.ToLower()));
+
+            return View("CategoryMovies", movies.ToList());
+        }
     }
 }
