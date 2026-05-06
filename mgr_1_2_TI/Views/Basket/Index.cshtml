@@ -41,11 +41,12 @@
                 $(".basket-totals").text(response.basketSum + "zł");
                 if (response.itemQuantity == 0) {
                     $(".item-id-" + response.itemId).fadeOut("slow");
+                    $("#nav_basket_redirect").text(response.basketCount);
                     return;
                 }
                 $(".item-quantity-" + response.itemId).text(response.itemQuantity);
                 $(".item-full-price-" + response.itemId).text(response.itemFullPrice + 'zł');
-
+                $("#nav_basket_redirect").text(response.basketCount);
             });
         });
     </script>

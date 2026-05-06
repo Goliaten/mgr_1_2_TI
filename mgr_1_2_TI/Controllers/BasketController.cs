@@ -39,7 +39,8 @@ namespace mgr_1_2_TI.Controllers
                 itemId = id,
                 itemQuantity = BasketManager.RemoveFromBasket(HttpContext.Session, db, id),
                 itemFullPrice = BasketManager.GetItemFullPrice(HttpContext.Session, db, id),
-                basketSum = BasketManager.GetSumValueFromBasket(HttpContext.Session, db)
+                basketSum = BasketManager.GetSumValueFromBasket(HttpContext.Session, db),
+                basketCount = BasketManager.GetCount(HttpContext.Session, db)
             };
             return Json(model);
         }

@@ -11,5 +11,6 @@ namespace mgr_1_2_TI.Models.ViewModels
         public int itemQuantity { get; set; }
         public decimal itemFullPrice { get; set; }
         public decimal? basketSum { get; set; }
+        public int basketCount { get; set; }
     }
 }
