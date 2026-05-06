@@ -38,6 +38,7 @@
             
             if (idBasketItem == '') { return; }
             $.post("/Basket/RemoveFromBasket", { "id": idBasketItem }, function (response) {
+                $(".basket-totals").text(response.basketSum + "zł");
                 if (response.itemQuantity == 0) {
                     $(".item-id-" + response.itemId).fadeOut("slow");
                     return;
@@ -45,7 +46,6 @@
                 $(".item-quantity-" + response.itemId).text(response.itemQuantity);
                 $(".item-full-price-" + response.itemId).text(response.itemFullPrice + 'zł');
 
-                $(".basket-totals").text(response.basketSum + "zł");
             });
         });
     </script>
