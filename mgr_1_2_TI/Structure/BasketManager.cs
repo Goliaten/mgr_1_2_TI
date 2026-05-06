@@ -92,6 +92,16 @@ namespace mgr_1_2_TI.Structure
             }
             return currentMovie.FullPrice;
         }
+        public static int GetCount(ISession session, MovieContext db)
+        {
+            var basket = GetManyFromBasket(session, db);
+            var sum = 0;
+            foreach (var item in basket)
+            {
+                sum += item.Count;
+            }
+            return sum;
+        }
         public static decimal GetSumValueFromBasket(ISession session, MovieContext db)
         {
             decimal sum = 0;
