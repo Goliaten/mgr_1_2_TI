@@ -23,6 +23,21 @@
     </div>
 
     <div class="nav-item">
+      <ul>
+        <li>
+          <a href="@Url.Action("Register", "Account")" class="glyphicon glyphicon-log-in">
+            Zarejestruj
+          </a>
+        </li>
+        <li>
+          <a href="@Url.Action("Login", "Account")">
+            Zaloguj
+          </a>
+        </li>
+      </ul>
+    </div>
+
+    <div class="nav-item">
       <a class="nav-link active" href="@Url.Action("Index", "Basket")">🛒(<span
         id="nav_basket_redirect">@ViewBag.BasketCount</span>)</a>
       </div>
