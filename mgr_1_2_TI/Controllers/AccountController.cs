@@ -5,6 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using mgr_1_2_TI.Models.Users;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.Data;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 
@@ -27,20 +28,29 @@ namespace mgr_1_2_TI.Controllers
         }
         public async Task<IActionResult> Register()
         {
-            var user = await userManager.FindByNameAsync("TestUser");
+            string login = "aaa";
+            string password = "1234";
+            var user = await userManager.FindByNameAsync(login);
             if (user == null)
             {
-                user = new WebUser()
+                try
                 {
-                    UserName = "aaa",
-                    FirstName = "Grzegorz",
-                    LastName = "Brzęczyszczykiewicz",
-                    Email = "janpatdrugi@mail.to",
-                    Address = "Chrząszczyszewoszyce powiat Łękołody"
-                };
-                string password = "1234";
-                await userManager.CreateAsync(user, password);
-                ViewBag.Message = "Użytkownik stworzony";
+                    user = new WebUser()
+                    {
+                        UserName = login,
+                        FirstName = "Grzegorz",
+                        LastName = "Brzęczyszczykiewicz",
+                        Email = "janpatdrugi@mail.to",
+                        Address = "Chrząszczyszewoszyce powiat Łękołody"
+                    };
+                    await userManager.CreateAsync(user, password);
+                    ViewBag.Message = "Użytkownik stworzony";
+                }
+                catch (Exception e)
+                {
+                    ViewBag.Message = $"Błąd podczas tworzenia użytkownika: {e.Message}";
+                }
+
             }
             else
             {
